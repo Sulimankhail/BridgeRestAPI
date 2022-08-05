@@ -11,7 +11,7 @@ struct DeviceWithPS
     {
         DELETED_ISSUE = -1
     };
-    std::string title;
+    std::string title; //TODO: change the fields as per mpole with a phase space
     int issue{DELETED_ISSUE};
     std::string writer;
     std::string penciler;
