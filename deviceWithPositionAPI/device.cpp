@@ -16,7 +16,7 @@ std::string toJson(const DeviceWithPS &deviceWithPs)
         using String = rapidjson::GenericStringRef<char>;
         obj.AddMember(String{key}, String{value.c_str()}, doc.GetAllocator());
     };
-    addMember("title", deviceWithPs.title);
+    addMember("title", deviceWithPs.title); //TODO: change the names
     obj.AddMember("issue", deviceWithPs.issue, doc.GetAllocator());
     addMember("writer", deviceWithPs.writer);
     addMember("penciler", deviceWithPs.penciler);
