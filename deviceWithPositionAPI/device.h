@@ -18,6 +18,21 @@ struct DeviceWithPS
     std::string inker;
     std::string letterer;
     std::string colorist;
+    std::string t; // this is the parameter t. Description:
+    std::string t1; // this is the parameter t. Description:
+    std::string t2; // this is the parameter t. Description:
+    std::string n; // this is the parameter n. Description:
+    int method; // this is the parameter t. Description:
+    std::string name;
+    double length;
+    double strength;
+    std::string type;
+    double ps_x;
+    double ps_xp;
+    double ps_y;
+    double ps_ps_tp;
+    double ps_s;
+    double ps_k;
 };
 
 std::string toJson(const DeviceWithPS &deviceWithPs);

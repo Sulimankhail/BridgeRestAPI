@@ -8,6 +8,7 @@ namespace deviceWithPosition
 {
 
 std::string toJson(const DeviceWithPS &deviceWithPs)
+
 {
     rapidjson::Document doc;
     rapidjson::Value &obj = doc.SetObject();
