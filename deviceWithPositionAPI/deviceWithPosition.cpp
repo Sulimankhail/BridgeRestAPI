@@ -7,12 +7,16 @@
 
 namespace deviceWithPosition
 {
+    std::mutex g_dbMutex;
 using DeviceWithPosition = std::vector<DeviceWithPS>;
 
 DeviceWithPosition load()
-{ }
+{
+    DeviceWithPosition db;
+    return db;
+}
 
-DeviceWithPS calculateBeamPosition(DeviceWithPS &&deviceWithPs)
+DeviceWithPS calculateBeamPosition(DeviceWithPosition  &db, DeviceWithPS &&deviceWithPs)
 {
     if (deviceWithPs.length< 0.0 || deviceWithPs.id < 1 )
     {
@@ -50,6 +54,11 @@ DeviceWithPS calculateBeamPosition(DeviceWithPS &&deviceWithPs)
             ps_s = 1;
             deviceWithPs.
             ps_k = 1;
+//    std::unique_lock<std::mutex> lock(g_dbMutex);
+    // ids are zero-based
+//    const std::size_t id = db.size();
+//    db.push_back(deviceWithPs);
+//    return id;
 
     return deviceWithPs;
 }
