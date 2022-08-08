@@ -61,7 +61,7 @@ void Service::calculateBeamPosition(const Request &request, Response response)
         const std::string json = request.body();
         // call the calculate function which is part of business logic and get back the object with mpole and phase space after calculation.
         // the mpole characteristic will not change but the phase space values which is the beam position should be newly calculated and returned in the object
-        deviceWithPosition::DeviceWithPS deviceWithPs = deviceWithPosition::calculateBeamPosition(m_db,deviceWithPosition::fromJson(json));
+        deviceWithPosition::DeviceWithPS deviceWithPs = deviceWithPosition::calculateBeamPosition(deviceWithPosition::fromJson(json));
         // write to the response the json value of the object deviceWithposition. We need json so the caller service will be able to read it.
         response.send(Pistache::Http::Code::Ok, deviceWithPosition::toJson(deviceWithPs), MIME(Text, Plain));
     }

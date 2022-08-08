@@ -16,8 +16,9 @@ DeviceWithPosition load()
     return db;
 }
 
-DeviceWithPS calculateBeamPosition(DeviceWithPosition  &db, DeviceWithPS &&deviceWithPs)
+DeviceWithPS calculateBeamPosition(DeviceWithPS &&deviceWithPs)
 {
+    // add validations on some or all fields
     if (deviceWithPs.length< 0.0 || deviceWithPs.id < 1 )
     {
         throw std::runtime_error("Invalid deviceWithPosition");
@@ -54,11 +55,6 @@ DeviceWithPS calculateBeamPosition(DeviceWithPosition  &db, DeviceWithPS &&devic
             ps_s = 1;
             deviceWithPs.
             ps_k = 1;
-//    std::unique_lock<std::mutex> lock(g_dbMutex);
-    // ids are zero-based
-//    const std::size_t id = db.size();
-//    db.push_back(deviceWithPs);
-//    return id;
 
     return deviceWithPs;
 }
