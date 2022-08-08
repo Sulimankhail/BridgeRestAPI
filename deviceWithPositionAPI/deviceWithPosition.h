@@ -12,6 +12,6 @@ using DeviceWithPosition = std::vector<DeviceWithPS>;
 
 DeviceWithPosition load();
 
-std::size_t calculateBeamPosition(DeviceWithPosition &db, DeviceWithPS &&deviceWithPs);
+DeviceWithPS calculateBeamPosition(DeviceWithPS &&deviceWithPs);
 
 } // namespace deviceWithPosition

@@ -7,49 +7,51 @@
 
 namespace deviceWithPosition
 {
-
-std::mutex g_dbMutex;
 using DeviceWithPosition = std::vector<DeviceWithPS>;
 
 DeviceWithPosition load()
-{
-    DeviceWithPosition db;
-    db.emplace_back(fromJson(
-        R"json({"title":"The Fantastic Four","issue":1,"writer":"Stan Lee","penciler":"Jack Kirby","inker":"George Klein","letterer":"Artie Simek","colorist":"Stan Goldberg"})json"));
-    {
-        DeviceWithPS deviceWithPs;
-        deviceWithPs.title = "The Fantastic Four";
-        deviceWithPs.issue = 3;
-        deviceWithPs.writer = "Stan Lee";
-        deviceWithPs.penciler = "Jack Kirby";
-        deviceWithPs.inker = "Sol Brodsky";
-        deviceWithPs.letterer = "Artie Simek";
-        deviceWithPs.colorist = "Stan Goldberg";
-        db.push_back(deviceWithPs);
-    }
-    return db;
-}
+{ }
 
-bool validId(const DeviceWithPosition &db, std::size_t &id)
+DeviceWithPS calculateBeamPosition(DeviceWithPS &&deviceWithPs)
 {
-    return id < db.size() && db[id].issue != DeviceWithPS ::DELETED_ISSUE;
-}
-
-std::size_t calculateBeamPosition(DeviceWithPosition &db, DeviceWithPS &&deviceWithPs)
-{
-    if (deviceWithPs.title.empty() || deviceWithPs.issue < 1 ||
-            deviceWithPs.writer.empty() || deviceWithPs.penciler.empty() ||
-            deviceWithPs.inker.empty() || deviceWithPs.letterer.empty() ||
-            deviceWithPs.colorist.empty())
+    if (deviceWithPs.length< 0.0 || deviceWithPs.id < 1 )
     {
         throw std::runtime_error("Invalid deviceWithPosition");
     }
+    //todo: call the thor_scsi calculate beam position here
+    // delete be bellow code after the call to thor_scsi is made
+            deviceWithPs.
+                    name = "Mpole name goes here QR12345";
+            deviceWithPs.
+            type = "quadrupole";
+            deviceWithPs.
+            id = 1;
+            deviceWithPs.
+            t = "TTT";
+            deviceWithPs.
+            t1 = "Jack Kirby";
+            deviceWithPs.
+            t2 = "Sol Brodsky";
+            deviceWithPs.
+            n = "Artie Simek";
+            deviceWithPs.
+            length = 1;
+            deviceWithPs.
+            strength = 1;
+            deviceWithPs.
+            ps_xp = 1;
+            deviceWithPs.
+            ps_x = 1;
+            deviceWithPs.
+            ps_y = 1;
+            deviceWithPs.
+            ps_yp = 1;
+            deviceWithPs.
+            ps_s = 1;
+            deviceWithPs.
+            ps_k = 1;
 
-    std::unique_lock<std::mutex> lock(g_dbMutex);
-    // ids are zero-based
-    const std::size_t id = db.size();
-    db.push_back(deviceWithPs);
-    return id;
+    return deviceWithPs;
 }
 
 } // namespace deviceWithPosition

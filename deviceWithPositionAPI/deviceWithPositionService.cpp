@@ -19,7 +19,7 @@ class Service
     // portNumber
     // host: it can be localhost or over an ip
 public:
-    Service(uint16_t portNum = 8000, unsigned int numThreads = std::thread::hardware_concurrency())
+    Service(uint16_t portNum = 8080, unsigned int numThreads = std::thread::hardware_concurrency())
         : m_portNum(portNum),
         m_numThreads(numThreads),
         m_address("localhost", portNum),
@@ -35,7 +35,7 @@ private:
 
     using Request = Pistache::Rest::Request;
     using Response = Pistache::Http::ResponseWriter;
-    void calculateBeamPosition(const Request &request, Response response);
+    std::basic_string<char> calculateBeamPosition(const Request &request, Response response);
 
     uint16_t m_portNum;
     unsigned int m_numThreads;
@@ -51,13 +51,13 @@ void Service::configureRoutes()
     Pistache::Rest::Routes::Post(m_router, "/calculate", Pistache::Rest::Routes::bind(&Service::calculateBeamPosition, this));
 }
 
-void Service::calculateBeamPosition(const Request &request, Response response)
+std::basic_string<char> Service::calculateBeamPosition(const Request &request, Response response)
 {
     try
     {
         const std::string json = request.body();
-        const std::size_t id = deviceWithPosition::calculateBeamPosition(m_db, deviceWithPosition::fromJson(json));
-        response.send(Pistache::Http::Code::Ok, "beam position " + std::to_string(id) + " calculated.", MIME(Text, Plain));
+        deviceWithPosition::DeviceWithPS deviceWithPs = deviceWithPosition::calculateBeamPosition(deviceWithPosition::fromJson(json));
+        return toJson(deviceWithPs);
     }
     catch (const std::runtime_error &bang)
     {
